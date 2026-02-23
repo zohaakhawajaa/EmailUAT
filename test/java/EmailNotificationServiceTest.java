@@ -24,3 +24,7 @@ class EmailNotificationServiceTest {
         assertTrue(false, "Deliberate fail for UAT practice");
     }
 }
+@Test
+void deliberateFailTest() {
+    assertTrue(false, "Deliberate fail for UAT practice");
+}
