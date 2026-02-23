@@ -23,8 +23,8 @@ class EmailNotificationServiceTest {
         // This will fail on purpose
         assertTrue(false, "Deliberate fail for UAT practice");
     }
-}
-@Test
-void deliberateFailTest() {
-    assertTrue(false, "Deliberate fail for UAT practice");
+    @Test
+    void deliberateFailTest() {
+        assertTrue(false, "Deliberate fail for UAT practice");
+    }
 }
