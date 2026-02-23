@@ -17,4 +17,10 @@ class EmailNotificationServiceTest {
         assertFalse(service.isValidRecipient("invalid"));
         assertFalse(service.isValidRecipient("user@"));
     }
+
+    @Test
+    void deliberateFailTest() {
+        // This will fail on purpose
+        assertTrue(false, "Deliberate fail for UAT practice");
+    }
 }
