@@ -1,13 +1,10 @@
+package com.example.app;
+
 public class EmailNotificationService {
 
+    // Simple email validation
     public boolean isValidRecipient(String email) {
-
-        // ❌ null email not allowed
-        if (email == null) {
-            return false;
-        }
-
-        // ✅ basic email validation
+        if (email == null) return false;
         return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
     }
 }

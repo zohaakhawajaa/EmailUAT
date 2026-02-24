@@ -1,10 +1,22 @@
+package com.example.app;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class SimpleFailTest {
+class EmailNotificationServiceTest {
+
+    private final EmailNotificationService service = new EmailNotificationService();
 
     @Test
-    void uatFailTest() {
-        assertTrue(false, "UAT deliberate failure");
+    void shouldAcceptValidEmails() {
+        assertTrue(service.isValidRecipient("user@example.com"));
+        assertTrue(service.isValidRecipient("user+tag@example.org"));
+    }
+
+    @Test
+    void shouldRejectInvalidEmails() {
+        assertFalse(service.isValidRecipient(null));
+        assertFalse(service.isValidRecipient("invalid"));
+        assertFalse(service.isValidRecipient("user@"));
     }
 }

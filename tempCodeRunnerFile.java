@@ -1,3 +1,5 @@
+package com.example.app; // use your package
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
