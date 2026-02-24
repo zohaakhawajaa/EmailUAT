@@ -14,4 +14,8 @@ public class EmailNotificationServiceTest {
 
         fail("❌ INTENTIONAL FAILURE — CI MUST FAIL EVEN IF LOGIC IS CORRECT");
     }
+    @Test
+    void forceFailTest() {
+      fail("CI MUST FAIL");
+    }
 }
