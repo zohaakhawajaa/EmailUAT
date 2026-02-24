@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI with red test
 
 on:
   push:
@@ -21,8 +21,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build and run tests
+      - name: Download JUnit Console
+        run: wget -O junit-platform-console-standalone.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.0/junit-platform-console-standalone-1.10.0.jar
+
+      - name: Compile Java code
         run: |
           mkdir -p target/classes
-          javac -d target/classes src/main/java/com/example/app/EmailNotificationService.java src/test/java/com/example/app/*.java
-          java -jar junit-platform-console-standalone-1.10.0.jar --class-path target/classes --scan-class-path
+          javac -d target/classes src/main/java/com/example/app/*.java src/test/java/com/example/app/*.java
+
+      - name: Run tests
+        run: |
+          java -jar junit-platform-console-standalone.jar \
+            --class-path target/classes \
+            --scan-class-path
