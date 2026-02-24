@@ -1,10 +1,17 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+package com.example.app;
 
-class AppTest {
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.fail;
+
+public class EmailNotificationServiceTest {
 
     @Test
-    void testFail() {
-        fail("Deliberate failure");
+    void forceFailEmailTest() {
+        EmailNotificationService service = new EmailNotificationService();
+
+        // even though this is valid, we FORCE FAIL
+        boolean result = service.isValidRecipient("test@example.com");
+
+        fail("❌ INTENTIONAL FAILURE — CI MUST FAIL EVEN IF LOGIC IS CORRECT");
     }
 }
