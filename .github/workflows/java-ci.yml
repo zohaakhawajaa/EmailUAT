@@ -1,35 +1,40 @@
-name: Java CI
+name: Java CI with JUnit
 
 on:
   push:
-    branches:
-      - uat
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # 1️⃣ Checkout the repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup JDK 17
+      # 2️⃣ Setup Java JDK
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "temurin"
+          distribution: 'temurin'
+          java-version: '20'  # Change to your project’s Java version
 
-      - name: Download JUnit standalone
+      # 3️⃣ Compile all Java files
+      - name: Compile Java files
         run: |
-          wget -O junit-platform-console-standalone.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.0/junit-platform-console-standalone-1.10.0.jar
+          echo "Compiling all Java files..."
+          javac $(find src/main/java -name "*.java")
 
-      - name: Compile source and tests
+      # 4️⃣ Run JUnit tests
+      - name: Run JUnit Tests
         run: |
-          mkdir -p target/classes
-          javac -d target/classes src/main/java/**/*.java src/test/java/**/*.java
-
-      - name: Run tests
-        run: |
+          echo "Running JUnit tests..."
+          # Download JUnit standalone jar
+          curl -L -o junit-platform-console-standalone.jar https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.0/junit-platform-console-standalone-1.10.0.jar
+          # Run tests in src/test/java
           java -jar junit-platform-console-standalone.jar \
-            --class-path target/classes \
+            --class-path src/main/java:src/test/java \
             --scan-class-path
